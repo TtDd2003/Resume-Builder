@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>My Resume Builder</title>
+    <style>
+        .nav-link{
+            transition: 0.5s ease;
+        }
+        .nav-link:hover {
+            color:red; /* Example hover color (gold) */
+            text-decoration: underline;
+            transform:scale(1.0);
+        }
+        .design{
+            outline: 2px solid gray;
+            width: 80%;
+            padding: 3%;
+            margin: 10px auto;
+            background: linear-gradient( 140deg,white,ghostwhite, whitesmoke, lightseagreen);
+            border-radius: 20px;
+            box-shadow: 9px 9px 9px  lightgrey;        
+        }
+        .design .body{
+            display: flex;
+        }
+        .grid{
+            grid-gap: 15px;
+        }
+       .grid .row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+
+       .grid .col-md-3 {
+          margin-bottom: 15px;
+        }
+        .resume-card {
+          position: relative;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .resume-card img {
+           width: 98%; 
+           height: auto;
+           object-fit: cover;         }
+        .resume-card .overlay {
+           position: absolute;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           background-color: rgba(0, 0, 0, 0.4); 
+           color: white;
+           opacity: 0;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           transition: opacity 0.3s ease;
+           border-radius: 10px;
+        }
+
+        .resume-card .overlay .text {text-align: center;font-style: italic;  }
+
+        .resume-card .overlay .text h4 {
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+          color: yellow;
+        }
+
+        .resume-card .overlay .text p {font-size: 0.7rem; color:yellow;}
+         .resume-card:hover {
+           transform: scale(1.05); 
+           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+         .resume-card:hover .overlay {opacity: 1;  }
+    </style>
+</head>
+   {% load static %}
+<body>
+    <!-- Header Section -->
+    <div class="container  bg-primary">
+        <div class="logo mb-3 ">
+            <h1 class=text-white>My Resume Builder</h1>
+        </div>
+        <nav class="navbar navbar-expand-lg  bg-primary">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'create_resume' %}">Create Resume</a>
+                </li>
+    
+                
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'my_resumes' %}">My Resumes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Build Your Professional Resume with Ease!</h2>
+            <p> Choose from a variety of templates and start building your resume in minutes.<br>
+                Creating a professional resume has never been easier.
+            </p>
+        </div>
+    </section>
+
+    <!--Design Section -->
+    <div class="design">
+         <h3><b>Choose a Free[Resume] Trail </b></h3>
+         <div class="body">
+         <p class="col-8">pick one of our proffesional templates to buid your carrier and get started on your jon applications.Just fill out the form and basic       details and then to create flawless designs and make a impression on your targeted company .Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+         <img src="/static/7.png"  class="img-fluid col-4">
+        </div>
+         <a href="{% url 'create_resume' %}" class="btn btn-primary p-3 ">Start Now &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <section class="grid p-3 bg-warning">
+        <h2 class="text-center m-3 p-3 bg-dark text-white"><em>Top Selected Resume</em></h2>
+        <div class="row">
+            <!-- Resume Design 1 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/1.JPEG" class="img-fluid" alt="Resume Design 1">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4 >Resume Design 1</h4>
+                            <p>Professional and clean layout ideal for corporate jobs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Resume Design 2 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/2.JPEG" class="img-fluid" alt="Resume Design 2">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 2</h4>
+                            <p>Creative and modern style for graphic design jobs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Resume Design 3 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/5.JPEG" class="img-fluid" alt="Resume Design 3">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 3</h4>
+                            <p>Simple and elegant, perfect for executive positions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Resume Design 4 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/6.JPEG" class="img-fluid" alt="Resume Design 4">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 4</h4>
+                            <p>Clean and minimalistic design for tech-related fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Resume Design 5 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/7.JPEG" class="img-fluid" alt="Resume Design 4">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 4</h4>
+                            <p>Clean and minimalistic design for tech-related fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Resume Design 6 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/13.JPEG" class="img-fluid" alt="Resume Design 4">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 4</h4>
+                            <p>Clean and minimalistic design for tech-related fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Resume Design 7 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/14.JPEG" class="img-fluid" alt="Resume Design 4">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 4</h4>
+                            <p>Clean and minimalistic design for tech-related fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+            <!-- Resume Design 8 -->
+            <div class="col-md-3 col-sm-6 col-12 mb-3">
+                <div class="resume-card">
+                    <img src="/static/images/15.PNG" class="img-fluid" alt="Resume Design 4">
+                    <div class="overlay">
+                        <div class="text">
+                            <h4>Resume Design 4</h4>
+                            <p>Clean and minimalistic design for tech-related fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h3>Key Features</h3>
+            <div class="feature">
+                <i class="fa-solid fa-cube"></i>
+                <h4>Custom Templates</h4>
+                <p>Choose from a variety of professional templates tailored to different industries.</p>
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-pencil"></i>
+                <h4>Easy to Use</h4>
+                <p>Our intuitive interface makes it easy to create your resume in no time.</p>
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-download"></i>
+                <h4>Download PDF</h4>
+                <p>Download your resume as a high-quality PDF file, ready to be shared with employers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 My Resume Builder | TriTechSolutions | All Rights Reserved</p>
+        </div>
+    </footer>
+
+</body>
+</html>

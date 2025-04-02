@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cv.full_name }}'s Resume</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    font-size: 16px;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.header { text-align: center;  margin-bottom: 20px;}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.profile-image-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+.profile-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.profile-details {text-align: center;}
+.full-name {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+}
+.contact-info { font-size: 1.2rem; color: #666;}
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
+}
+.left-column {
+    flex: 1;
+    background-color: darkslateblue;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+.left-column h2 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.left-column p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+.right-column {flex: 2;padding: 20px;}
+.right-column h2 {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    font-weight: 500;
+}
+.right-column p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+}
+.template p {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+footer { text-align: center;margin-top: 30px;}
+footer a {
+    font-size: 1.1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+footer a:hover {text-decoration: underline;}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+
+    .left-column {
+        background-color: darkslateblue;
+        margin-bottom: 20px;
+    }
+
+    .right-column {
+        padding: 20px;
+    }
+
+    .profile-image-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .full-name {
+        font-size: 1.8rem;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    section p {
+        font-size: 1rem;
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-info">
+                <div class="profile-image-container">
+                    {% if image_data_url %}
+                        <!-- Use base64-encoded image for the downloaded file -->
+                        <img src="{{ image_data_url }}" alt="Profile Image" class="profile-image">
+                    {% elif cv.profile_image %}
+                        <!-- Fallback for online view (URL-based image) -->
+                        <img src="{{ request.scheme }}://{{ request.get_host }}{{ cv.profile_image.url }}" alt="Profile Image" class="profile-image">
+                    {% else %}
+                        <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Image" class="profile-image">
+                    {% endif %}
+                </div>
+                <div class="profile-details">
+                    <h1 class="full-name">{{ cv.full_name }}</h1>
+                    <p class="contact-info"><strong>Email:</strong> {{ cv.email }}</p>
+                </div>
+            </div>
+        </header>
+    
+        <!-- Two Column Layout -->
+        <div class="main-content">
+            <!-- Left Column (Education) -->
+            <div class="left-column">
+                <section class="education">
+                    <h2><b><em><u>Education</u></em></b></h2>
+                    <p>{{ cv.education |safe }}</p>
+                </section>
+            </div>
+    
+            <!-- Right Column (Skills, Experience, Template) -->
+            <div class="right-column">
+                <section class="skills">
+                    <h2>Skills</h2>
+                    <p>{{ cv.skills |safe }}</p>
+                </section>
+
+                <section class="experience">
+                    <h2><em>Experience</em></h2>
+                    <p>{{ cv.experience |safe }}</p>
+                </section>
+   
+                <section class="template">
+                    <h2>Selected Template</h2>
+                    <p>{{ cv.template.name |safe }}</p>
+                </section>
+            </div>
+        </div>
+    
+        <!-- Button to download the resume -->
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'download_resume' cv.id %}" class="btn btn-success">
+                Download Resume <i class="fa-solid fa-download"></i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

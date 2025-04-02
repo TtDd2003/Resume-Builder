@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style3.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>My Resume </title>
+    {% load static %}
+    <style>
+        section{
+            display:grid;
+            grid-template-columns: 2fr 2fr;
+            transition: 0.5s ease;
+        }
+        section :hover{
+            transform:scale(1.02);
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><ins><b>My Resume</b></ins></h1>
+    </header>
+
+    <section class='bg-dark text-white'>
+        <h2 class=' text-white' >Personal Information</h2>
+        <p>Name: John Doe</p>
+        <p>Email: johndoe@example.com</p>
+        <p>Phone: +1234567890</p>
+    </section>
+
+    <section class='bg-info '>
+        <h2>Skills</h2>
+        <ul>
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>Django</li>
+            <li>HTML/CSS</li>
+        </ul>
+    </section>
+
+    <section class='bg-warning '>
+        <h2>Experience</h2>
+        <ul>
+            <li>Software Developer at ABC Corp (2020-2022)</li>
+            <li>Frontend Developer at XYZ Inc. (2018-2020)</li>
+        </ul>
+    </section>
+
+    <footer>
+        <a href="{% url 'contact' %}">Contact Me</a> | <a href="{% url 'create_resume' %}">Create New Resume</a>
+    </footer>
+</body>
+</html>

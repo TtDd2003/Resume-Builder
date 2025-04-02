@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Create Resume</title>
+    <style>
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .file-input {
+            display: none;
+        }
+        .custom-file-input {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+    <header>
+        <h1>Create New Resume</h1>
+    </header>
+
+<section>
+    <h2>Template: {{ template.name }}</h2>
+    <form action="{% url 'create_resume' %}?template_id={{ template.id }}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Profile Image Selector -->
+        <div class="image-container">
+            <img id="profileImage" class="profile-image" src="{% static 'images/default-profile.png' %}" alt="Profile Image">
+        </div>
+        <input type="file" id="imageInput" name="profile_image" class="file-input" accept="image/*" onchange="previewImage(event)">
+        <label for="imageInput" class="btn btn-success text-light">Select Profile Picture</label>
+        <br>
+    
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="full_name" required><br>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+    
+        <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills" required></textarea><br>
+    
+        <label for="experience">Experience:</label>
+        <textarea id="experience" name="experience" required></textarea><br>
+    
+        <label for="education">Education:</label>
+        <textarea id="education" name="education" required></textarea><br>
+    
+        <button type="submit">Create Resume</button>
+    </form>        
+</section>
+
+<footer>
+    <a href="{% url 'my_resumes' %}">My Resume</a> | <a href="{% url 'contact' %}">Contact Me</a>
+</footer>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function() {
+            const img = document.getElementById("profileImage");
+            img.src = reader.result; // Update the image source to the selected file
+        };
+        if (file) {
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
+    }
+</script>
+
+</body>
+</html>
